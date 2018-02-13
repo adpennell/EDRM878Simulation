@@ -17,6 +17,7 @@ return(test_fun.out)
 }
 
 
-test_fun(100,1,2,0)
-test_dat1 <-replicate(100000,test_fun(100,1,2,0))
 
+test_dat1 <-replicate(1000000,test_fun(100,1,2,0))
+
+hit_rate <- sum(test_dat1[4,])/1000000
