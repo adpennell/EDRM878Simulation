@@ -26,6 +26,55 @@ reject.p <- rowSums(mydata)[3]/1000
 ## Save my results as a txt file
 write.table(mydata, "C:/Users/Ginger Jiang/Desktop/mydata.txt", sep="\t")
 
+# sample size: 10 Confidence level:.95, replication 9604
+mydata.1 <- replicate (9604,uniform(10,.95,"two.sided"))
+reject.p.1 <- rowSums(mydata.1)[3]/9604
+
+# sample size: 30 Confidence level:.95, replication 9604
+mydata.2 <- replicate (9604,uniform(30,.95,"two.sided"))
+reject.p.2 <- rowSums(mydata.2)[3]/9604
+
+# sample size: 50 Confidence level:.95, replication 9604
+mydata.3 <- replicate (9604,uniform(50,.95,"two.sided"))
+reject.p.3 <- rowSums(mydata.3)[3]/9604
+
+# sample size: 100 Confidence level:.95, replication 9604
+mydata.4 <- replicate (9604,uniform(100,.95,"two.sided"))
+reject.p.4 <- rowSums(mydata.4)[3]/9604
+
+# sample size: 10 Confidence level:.90, replication 9604
+mydata.5 <- replicate (9604,uniform(10,.90,"two.sided"))
+reject.p.5<- rowSums(mydata.5)[3]/9604
+
+# sample size: 30 Confidence level:.90, replication 9604
+mydata.6 <- replicate (9604,uniform(30,.90,"two.sided"))
+reject.p.6<- rowSums(mydata.6)[3]/9604
+
+# sample size: 50 Confidence level:.90, replication 9604
+mydata.7 <- replicate (9604,uniform(50,.90,"two.sided"))
+reject.p.7<- rowSums(mydata.7)[3]/9604
+
+# sample size: 100 Confidence level:.90, replication 9604
+mydata.8 <- replicate (9604,uniform(100,.90,"two.sided"))
+reject.p.8<- rowSums(mydata.8)[3]/9604
+
+reject.p.1
+reject.p.2
+reject.p.3
+reject.p.4
+reject.p.5
+reject.p.6
+reject.p.7
+reject.p.8
+
+
+
+
+
+
+
+
+
 
 
 
