@@ -1,0 +1,78 @@
+---
+title: Monte Carlo Simulation (*F* Distribution)
+author: Michael A. Seaman, University of South Carolina
+---
+
+This is a Monte Carlo simulation of the t test coverage
+of the mean when samples are from the F distribution.
+
+I'm setting up some parameters that I can easily change,
+so I'm putting those right at the top. I'm starting with
+some initial values to demonstrate.
+
+```{r}
+sample.size <- 20
+degrees.1 <- 2
+degrees.2 <- 10
+conf.level <- .95
+num.rep <- 100
+```
+
+This is a function for a single replication. You must
+supply the sample size, degrees of freedom (1 and 2)
+and the confidence level.
+
+```{r}
+MonteF <- function(n, df1, df2, ci.level){
+
+  mean.f = df2/(df2-2)
+  f.sample <- rf(n, df1, df2)
+  t.result <- t.test(f.sample, conf.level = ci.level)
+  ci.lb <- t.result$conf.int[1]
+  ci.ub <- t.result$conf.int[2]
+  
+  if ((mean.f > ci.lb) & (mean.f < ci.ub)) result <- 1 else result <- 0
+  
+  MonteF.out <- vector()
+  
+  MonteF.out[1] <- ci.lb
+  MonteF.out[2] <- ci.ub
+  MonteF.out[3] <- result
+  
+  return(MonteF.out)
+  
+}
+```
+
+Next I'm going to call the function with the demonstration
+parameters set above.
+
+```{r}
+F.results <- replicate(num.rep,
+                       MonteF(sample.size,
+                              degrees.1,
+                              degrees.2,
+                              conf.level))
+```
+
+I'm going to show these results, but you probably wouldn't want
+to do this if you use a large number of replications. I'm just
+demonstrating how they could look.
+
+```{r}
+F.results
+```
+
+
+I'm going to tabulate the results.
+
+```{r}
+prop.coverage <- sum(F.results[3,])/num.rep
+```
+
+Finally, I'm going to show this coverage rate.
+
+```{r}
+prop.coverage
+```
+
